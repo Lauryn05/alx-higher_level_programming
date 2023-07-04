@@ -3,7 +3,15 @@
 
 
 class Rectangle:
-    """Represent a rectangle."""
+    """Represent a rectangle.
+
+    Attributes:
+        print_symbol (any): Symbol used for string rep
+        number_of_instances (int): Number of rectangle instances
+    """
+    
+    print_symbol = "#"
+    number_of_instances = 0
 
     def __init__(self, width=0, height=0):
         """Initializes a new rectangle
@@ -14,6 +22,7 @@ class Rectangle:
         """
         self.height = height
         self.width = width
+        type(self).number_of_instances += 1
 
     @property
     def width(self):
@@ -41,6 +50,24 @@ class Rectangle:
             raise ValueError("height must be >= 0")
         self.__height = value
 
+     @staticmethod
+     def bigger_or_equal(rect_1, rect_2):
+        """Return the Rectangle with the greater area.
+
+        Args:
+            rect_1 (Rectangle): The first Rectangle.
+            rect_2 (Rectangle): The second Rectangle.
+        Raises:
+            TypeError: If either of rect_1 or rect_2 is not a Rectangle.
+        """
+        if not isinstance(rect_1, Rectangle):
+            raise TypeError("rect_1 must be an instance of Rectangle")
+        if not isinstance(rect_2, Rectangle):
+            raise TypeError("rect_2 must be an instance of Rectangle")
+        if rect_1.area() >= rect_2.area():
+            return (rect_1)
+        return (rect_2)
+
         def area(self):
             """Return area"""
             return (self.__width * self.__height)
@@ -65,3 +92,14 @@ class Rectangle:
                 if a != self.__height - 1:
                     draw.append("\n")
             return ("".join(draw))
+
+        def __repr__(self):
+            """Return string rep of rectangle"""
+            draw = "Rectangle(" + str(self.__width)
+            draw = draw + ", " + str(self.__height) + ")"
+            return (draw)
+
+        def __del__(self):
+            """Print message for every deletion of rectangle"""
+            type(self). number_of_instances -= 1
+            print("Bye rectangle...")

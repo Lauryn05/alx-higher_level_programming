@@ -3,7 +3,13 @@
 
 
 class Rectangle:
-    """Represent a rectangle."""
+    """Represent a rectangle.
+
+    Attributes:
+        number_of_instances (int): Number of rectangle instances
+    """
+
+    number_of_instances = 0
 
     def __init__(self, width=0, height=0):
         """Initializes a new rectangle
@@ -14,6 +20,7 @@ class Rectangle:
         """
         self.height = height
         self.width = width
+        type(self).number_of_instances += 1
 
     @property
     def width(self):
@@ -65,3 +72,14 @@ class Rectangle:
                 if a != self.__height - 1:
                     draw.append("\n")
             return ("".join(draw))
+
+        def __repr__(self):
+            """Return string rep of rectangle"""
+            draw = "Rectangle(" + str(self.__width)
+            draw = draw + ", " + str(self.__height) + ")"
+            return (draw)
+
+        def __del__(self):
+            """Print message for every deletion of rectangle"""
+            type(self). number_of_instances -= 1
+            print("Bye rectangle...")

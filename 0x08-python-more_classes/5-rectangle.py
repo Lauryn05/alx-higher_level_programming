@@ -65,3 +65,13 @@ class Rectangle:
                 if a != self.__height - 1:
                     draw.append("\n")
             return ("".join(draw))
+
+        def __repr__(self):
+            """Return string rep of rectangle"""
+            draw = "Rectangle(" + str(self.__width)
+            draw = draw + ", " + str(self.__height) + ")"
+            return (draw)
+
+        def __del__(self):
+            """Print message for every deletion of rectangle"""
+            print("Bye rectangle...")
